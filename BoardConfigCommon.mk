@@ -55,15 +55,16 @@ BOARD_KERNEL_SEPARATED_DTBO := true
 NEED_KERNEL_MODULE_SYSTEM := true
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_SOURCE := kernel/oneplus/sdm845
-TARGET_KERNEL_CLANG_COMPILE := true
-TARGET_KERNEL_CLANG_VERSION := 7.0.2 
-TARGET_KERNEL_CLANG_PATH := $(ANDROID_BUILD_TOP)/prebuilts/clang/host/$(HOST_OS)-x86/clang-r328903/bin
+TARGET_KERNEL_CLANG_COMPILE := false
+TARGET_KERNEL_VERSION := 4.9
+TARGET_KERNEL_CLANG_VERSION := 7.0.2
+# TARGET_KERNEL_CLANG_PATH := $(ANDROID_BUILD_TOP)/prebuilts/clang/host/$(HOST_OS)-x86/clang-r328903/bin
 
 #Enable real time lockscreen charging current values
 BOARD_GLOBAL_CFLAGS += -DBATTERY_REAL_INFO
 
 # Use Snapdragon LLVM, if available
-TARGET_USE_SDCLANG := true
+# TARGET_USE_SDCLANG := true
 
 # Platform
 # TARGET_BOARD_PLATFORM := sdm845
@@ -76,9 +77,6 @@ BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 BOARD_VNDK_VERSION := current
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 
-# ANT+
-BOARD_ANT_WIRELESS_DEVICE := "qualcomm-hidl"
-
 # Audio
 USE_XML_AUDIO_POLICY_CONF := 1
 
@@ -90,15 +88,6 @@ TARGET_USES_QTI_CAMERA2CLIENT := true
 TARGET_CAMERA_NEEDS_CLIENT_INFO := true
 USE_CAMERA_STUB := true
 TARGET_USES_MEDIA_EXTENSIONS := false
-
-# Dex
-ifeq ($(HOST_OS),linux)
-  ifneq ($(TARGET_BUILD_VARIANT),eng)
-    WITH_DEXPREOPT ?= true
-  endif
-endif
-WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY ?= true
-DONT_DEXPREOPT_PREBUILTS := true
 
 # Display
 TARGET_USES_HWC2 := true
@@ -141,6 +130,9 @@ BOARD_PLAT_PUBLIC_SEPOLICY_DIR += device/qcom/sepolicy/public
 
 # Verified Boot
 BOARD_BUILD_DISABLED_VBMETAIMAGE := true
+
+export SKIP_ABI_CHECKS := true
+DONT_DEXPREOPT_PREBUILTS := true
 
 # Inherit from the proprietary version
 -include vendor/oneplus/sdm845-common/BoardConfigVendor.mk

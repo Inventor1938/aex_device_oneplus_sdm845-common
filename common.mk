@@ -14,7 +14,6 @@
 # limitations under the License.
 #
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_o_mr1.mk)
 
 # Get non-open-source specific aspects
@@ -45,10 +44,6 @@ AB_OTA_POSTINSTALL_CONFIG += \
 PRODUCT_PACKAGES += \
     otapreopt_script
 
-# ANT+
-PRODUCT_PACKAGES += \
-    AntHalService
-
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default
@@ -56,10 +51,6 @@ PRODUCT_PACKAGES += \
 # Boot control
 PRODUCT_PACKAGES_DEBUG += \
     bootctl
-
-# Camera
-PRODUCT_PACKAGES += \
-    Snap
 
 # Common init scripts
 PRODUCT_PACKAGES += \
@@ -69,10 +60,6 @@ PRODUCT_PACKAGES += \
 # Display
 PRODUCT_PACKAGES += \
     libvulkan
-
-# HotwordEnrollement app permissions
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/privapp-permissions-hotword.xml:system/etc/permissions/privapp-permissions-hotword.xml
 
 # IMS
 PRODUCT_PACKAGES += \
@@ -116,10 +103,9 @@ PRODUCT_PACKAGES += \
     com.android.nfc_extras
 
 # Pocket mode
-PRODUCT_PACKAGES += \
-    OnePlusPocketMode \
-    DeviceHandler \
-    OnePlusDoze
+#PRODUCT_PACKAGES += \
+#    DeviceHandler
+#    OnePlusDoze
 
 # Power
 PRODUCT_PACKAGES += \
